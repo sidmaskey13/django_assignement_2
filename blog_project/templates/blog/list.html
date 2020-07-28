@@ -1,0 +1,14 @@
+
+{% extends 'base.html' %}
+{% load cache %}
+{% cache 500 content%}
+{% block content %}
+<i><a href="{% url 'blog:create' %}" class="btn btn-success">Create new</a></i>
+    <hr>
+    {% for article in blog %}
+    <h5><a href="{% url 'blog:detail' article.id %}">{{article.title}}</a></h5>
+    <i>by {{article.user.username}}, created at: {{article.created_at}}</i>
+    <hr>
+    {% endfor %}
+{% endblock %}
+{% endcache %}

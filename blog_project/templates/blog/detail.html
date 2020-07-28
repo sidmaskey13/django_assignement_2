@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% block content %}
+<h1>{{article.title}}</h1>
+<i>by {{article.user.username}}, created at: {{article.created_at}}</i><br>
+{% if article.user == request.user %}
+<i><a href="{% url 'blog:update' article.id %}" class="btn btn-primary">Edit</a></i>
+<form action="{% url 'blog:delete' article.id %}" method="post">
+                {% csrf_token %}
+                <input type="submit" value="Delete" class="btn btn-danger">
+            </form>
+{% endif %}
+<p>{{article.body}}</p>
+<hr>
+
+
+<a href="{% url 'blog:list' %}">Back</a>
+{% endblock %}
